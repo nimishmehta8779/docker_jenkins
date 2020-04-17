@@ -5,7 +5,7 @@ node {
     }
 
     stage ('Build image') {
-        app = docker.build("nimshmehta8779/nginx")
+        app = docker.build("nimshmehta8779/ubuntu_nginx"), -f './Dockerfile .'
     }
 
     stage ('Test image') {
