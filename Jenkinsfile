@@ -11,7 +11,7 @@ pipeline {
             }
             steps {
                 script {
-                    app = "nimishmehta8779/ubuntu_nginx"
+                    app = docker.build("nimishmehta8779/ubuntu_nginx")
                     app.inside{
                         sh 'echo $(localhost:80)'
                     }
@@ -30,5 +30,14 @@ pipeline {
                 }
            }
         }
+        stage ("Delete unwanted images") {
+            when {
+                branch 'master'
+            }
+            steps {
+                sh "docker image rm nimishmehta8779/ubunu_nginx"
+            }
+        }
+
   }
 }
