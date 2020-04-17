@@ -25,10 +25,15 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry( 'https://registry.hub.docker.com', registryCredential) {
-                        docker.push()
+                        dockerImage.push()
                     }
                 }
            }
+        }
+        stage ("Remove unused Docker image") {
+            steps {
+                sh "docker rmi nimishmehta8779/ubuntu_nginx"
+            }
         }
     }
 }
