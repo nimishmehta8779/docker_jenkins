@@ -1,10 +1,11 @@
-pipeline{
+pipeline {
     agent any
-    stages{
-        stage('Checkout')
+    stages {
+        stage('Checkout') {
             steps{
                 echo "========Checking out scm ========"
                 checkout scm
             }
+        }
     }
 }
