@@ -1,18 +1,13 @@
 pipeline{
-    environment {
-        registry = "nimishmehta8779/nimish"
-        registryAccount = "dockerhub"
-    }
-    agent{
-        label "node"
-    }
+    agent any
     stages{
-        stage('Checkout')
+        stage('Checkout'){
             steps{
                 echo "========Checking out scm ========"
                 checkout scm
             }
-        stage('Build Docker Image')
+        }
+        stage('Build Docker Image'){
             when {
                 branch 'master'
             }
@@ -22,6 +17,7 @@ pipeline{
                     app = docker.build("nimishmehta8779/nginx")
                 }
             }
+        }
         stage('Test image')
         {
             app.inside{
