@@ -1,5 +1,3 @@
-#!/usr/bin/env groovy
-
 pipeline{
     environment {
         registry = "nimishmehta8779/nimish"
