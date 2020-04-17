@@ -37,7 +37,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                sh "docker prune -a --force"
+                sh "docker image prune -a --force"
             }
         }
         stage ("Deploy in production") {
