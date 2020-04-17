@@ -35,7 +35,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                sh "docker rmi -f nimishmehta8779/ubuntu_nginx"
+                sh 'docker rmi nimishmehta8779/ubuntu_nginx'
             }
         }
   }
