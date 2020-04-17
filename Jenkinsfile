@@ -5,6 +5,7 @@ pipeline {
         registryCredential = 'dockerhub'
         USERPASS = "password"
         USERNAME = "nimish"
+        PROD_IP = "192.168.1.2"
     }
     stages {
         stage ('Build') {
@@ -48,15 +49,15 @@ pipeline {
 //                input "Deploy to production ?"
 //                milestone (1)
                 script {
-                    sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@192.168.1.2 \"docker pull nimishmehta8779/ubuntu_nginx:latest\""
+                    sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$PROD_IP \"docker pull nimishmehta8779/ubuntu_nginx:latest\""
                     try {
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@192.168.1.2 \"docker stop ubuntu_nginx\""
-                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker rm ubuntu_nginx\""
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$PROD_IP \"docker stop ubuntu_nginx\""
+                        sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$PROD_IP \"docker rm ubuntu_nginx\""
                     } catch(err)
                     {
                         echo: 'caught error: $err'
                     }
-                    sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$prod_ip \"docker run --restart always --name ubuntu_nginx -p 8080:8080 -d nimishmehta8779/ubuntu_nginx:latest\""
+                    sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$PROD_IP \"docker run --restart always --name ubuntu_nginx -p 8080:8080 -d nimishmehta8779/ubuntu_nginx:latest\""
                 }
             }
         }
