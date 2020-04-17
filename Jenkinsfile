@@ -35,7 +35,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                sh "docker image rm nimishmehta8779/ubunu_nginx"
+                sh "docker image rm nimishmehta8779/ubuntu_nginx"
             }
         }
 
