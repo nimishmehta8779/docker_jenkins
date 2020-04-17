@@ -1,4 +1,6 @@
 pipeline {
+    def USERNAME = "nimish"
+    def USERPASS = "password"
     agent any 
     environment{
         registry = "nimishmehta8779/myrepo"
@@ -13,7 +15,7 @@ pipeline {
                 script {
                     app = docker.build("nimishmehta8779/ubuntu_nginx")
                     app.inside{
-                        sh 'echo $(localhost:80)'
+                        sh 'echo $(curl localhost)'
                     }
                 }
             }
@@ -35,9 +37,21 @@ pipeline {
                 branch 'master'
             }
             steps {
-                sh "docker image rm nimishmehta8779/ubuntu_nginx"
+                sh "docker prune -a --force"
             }
         }
 
-  }
+        stage ("Deploy in production") {
+            when {
+                branch 'master'
+            }
+            steps {
+                input "Deploy to production ?"
+                milestone(1)
+                script {
+                    sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$192.168.1.2 \"docker pull nimishmehta8779/ubuntu_nginx:latest"
+                }
+            }
+        }
+    }
 }
