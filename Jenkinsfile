@@ -30,10 +30,4 @@ pipeline {
                 }
            }
         }
-        stage ("Remove unused Docker image") {
-            steps {
-                sh "docker rmi nimishmehta8779/ubuntu_nginx"
-            }
-        }
-    }
-}
+  }
