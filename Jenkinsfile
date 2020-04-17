@@ -30,13 +30,5 @@ pipeline {
                 }
            }
         }
-        stage ("Delete unwanted images") {
-            when {
-                branch 'master'
-            }
-            steps {
-                sh 'docker rmi nimishmehta8779/ubuntu_nginx'
-            }
-        }
   }
 }
