@@ -40,13 +40,13 @@ pipeline {
                 sh "docker image prune -a --force"
             }
         }
-        stage ("Deploy in production") {
+        stage ("Deploy to production") {
             when {
                 branch 'master'
             }
             steps {
                 input "Deploy to production ?"
-                milestone(1)
+                milestone (1)
                 script {
                     sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@192.168.1.2 \"docker pull nimishmehta8779/ubuntu_nginx:latest"
                 }
