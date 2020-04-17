@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     environment{
-        registry = "nimishmehta8779/myrepo"
+        //registry = "nimishmehta8779/myrepo"
         registryCredential = 'dockerhub'
     }
     stages {
@@ -11,9 +11,9 @@ pipeline {
             }
             steps {
                 script {
-                    app = docker.build("nimishmehta8779/ubuntu_nginx")
+                    app = "nimishmehta8779/ubuntu_nginx"
                     app.inside{
-                        sh 'echo $(localhost:8080)'
+                        sh 'echo $(localhost:80)'
                     }
                 }
             }
@@ -25,10 +25,18 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry( 'https://registry.hub.docker.com', registryCredential) {
-                        app.push("latest")
+                    app.push("latest")
                     }
                 }
            }
+        }
+        stage ("Delete unwanted images") {
+            when {
+                branch 'master'
+            }
+            steps {
+                sh "docker rmi -f nimishmehta8779/ubuntu_nginx"
+            }
         }
   }
 }
