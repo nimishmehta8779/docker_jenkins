@@ -1,10 +1,10 @@
 pipeline {
-    def USERNAME = "nimish"
-    def USERPASS = "password"
     agent any 
     environment{
         registry = "nimishmehta8779/myrepo"
         registryCredential = 'dockerhub'
+        USERPASS = "password"
+        USERNAME = "nimish"
     }
     stages {
         stage ('Build') {
