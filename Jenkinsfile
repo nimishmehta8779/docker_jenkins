@@ -40,7 +40,6 @@ pipeline {
                 sh "docker prune -a --force"
             }
         }
-
         stage ("Deploy in production") {
             when {
                 branch 'master'
