@@ -48,7 +48,7 @@ pipeline {
 //                input "Deploy to production ?"
 //                milestone (1)
                 script {
-                    sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@192.168.1.2 \"docker pull nimishmehta8779/ubuntu_nginx:latest"
+                    sh "sshpassx -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@192.168.1.2 \"docker pull nimishmehta8779/ubuntu_nginx:latest\""
                 }
             }
         }
