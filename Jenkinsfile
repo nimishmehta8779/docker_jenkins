@@ -1,12 +1,10 @@
 pipeline{
     agent any
     stages{
-        stage('Checkout') {
+        stage('Checkout')
             steps{
                 echo "========Checking out scm ========"
                 checkout scm
             }
-        }
     }
 }
- 
