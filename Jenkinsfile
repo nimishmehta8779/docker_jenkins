@@ -7,5 +7,11 @@ node {
     stage ('Build image') {
         app = docker.build("nimshmehta8779/nginx")
     }
+
+    stage ('Test image') {
+        app.inside {
+            sh 'echo "Test Passed"'
+        }
+    }
 }
 
