@@ -1,6 +1,9 @@
 pipeline {
     agent any 
-
+    environment{
+        registry = "nimishmehta8779/myrepo"
+        registryCredential = 'dockerhub'
+    }
     stages {
         stage ('Build') {
             when {
@@ -20,8 +23,12 @@ pipeline {
                 branch 'master'
             }
             steps {
-                echo "Testing completed"
-            }
+                script {
+                    docker.withRegistry( 'https://registry.hub.docker.com', registryCredentials) {
+                        docker.push()
+                    }
+                }
+           }
         }
     }
 }
