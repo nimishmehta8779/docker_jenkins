@@ -57,7 +57,7 @@ pipeline {
                     {
                         echo: 'caught error: $err'
                     }
-                    sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$PROD_IP \"docker run --restart always --name ubuntu_nginx -p 80:8081  -d nimishmehta8779/ubuntu_nginx:latest\""
+                    sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@$PROD_IP \"docker run --restart always --name ubuntu_nginx -p 81:81  -d nimishmehta8779/ubuntu_nginx:latest\""
                 }
             }
         }
